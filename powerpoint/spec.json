@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "name": "University of Nottingham Presentation Template",
+    "version": "1.0.0",
+    "aspect": "16:9",
+    "width_pt": 960,
+    "height_pt": 540,
+    "sources": {
+      "reference_repo": "https://github.com/YanxiJiang/University-of-Nottingham-Presentation-Template",
+      "brand_colour": "https://www.nottingham.ac.uk/brand/visual/colour.aspx",
+      "brand_fonts": "https://www.nottingham.ac.uk/brand/visual/fonts.aspx"
+    }
+  },
+  "colours": {
+    "primary": {
+      "name": "Nottingham Blue",
+      "hex": "10263B",
+      "note": "key colour, must be visually dominant"
+    },
+    "tints": {
+      "blue80": "405162",
+      "blue60": "707D89",
+      "blue40": "9FA8B1",
+      "blue20": "CFD4D8",
+      "blue5": "F3F4F5"
+    },
+    "supporting": {
+      "jubilee_red": "B91C2E",
+      "rebels_gold": "DEB406",
+      "forest_green": "005F36",
+      "trent_turquoise": "37B4B0",
+      "malaysia_sky_blue": "009BC1"
+    },
+    "neutral": {
+      "white": "FFFFFF",
+      "portland_stone": "FAF6EF",
+      "portland_stone_40": "FDFBF9"
+    },
+    "usage_rules": [
+      "Nottingham Blue dominant; supporting colours < half of colour make-up of an asset",
+      "max two supporting colours per asset",
+      "black removed from palette — use Nottingham Blue for body copy too",
+      "neutral colours do not count toward the two-colour supporting limit"
+    ]
+  },
+  "theme": {
+    "headingFont": "Arial",
+    "bodyFont": "Arial",
+    "headingFont_ea": "Noto Sans CJK SC",
+    "bodyFont_ea": "Noto Sans CJK SC",
+    "note": "Arial is UoN's official PowerPoint substitute for Circular; Noto is the fallback family (HarmonyOS Sans excluded per user preference)",
+    "dk1": "10263B",
+    "lt1": "FFFFFF",
+    "dk2": "405162",
+    "lt2": "FAF6EF",
+    "accent1": "10263B",
+    "accent2": "009BC1",
+    "accent3": "B91C2E",
+    "accent4": "DEB406",
+    "accent5": "005F36",
+    "accent6": "37B4B0",
+    "hyperlink": "009BC1",
+    "followedhyperlink": "707D89"
+  },
+  "geometry_pt": {
+    "header_band": {
+      "x": 0,
+      "y": 0,
+      "w": 960,
+      "h": 44,
+      "fill": "10263B"
+    },
+    "logo_on_band": {
+      "x": 744,
+      "y": 6,
+      "w": 200,
+      "h": 32
+    },
+    "progress_track": {
+      "x": 0,
+      "y": 532,
+      "w": 960,
+      "h": 8,
+      "fill": "F3F4F5"
+    },
+    "progress_bar": {
+      "x": 0,
+      "y": 532,
+      "w": 960,
+      "h": 8,
+      "fill": "009BC1"
+    },
+    "title_ph": {
+      "x": 66,
+      "y": 56,
+      "w": 828,
+      "h": 64,
+      "size_pt": 32,
+      "bold": true,
+      "colour": "10263B"
+    },
+    "subtitle_ph": {
+      "x": 108,
+      "y": 220,
+      "w": 504,
+      "h": 70,
+      "size_pt": 20,
+      "bold": false,
+      "colour": "405162"
+    },
+    "body_ph": {
+      "x": 66,
+      "y": 168,
+      "w": 828,
+      "h": 330,
+      "size_pt": 20,
+      "bold": false,
+      "colour": "10263B"
+    },
+    "pagenum": {
+      "x": 908,
+      "y": 508,
+      "w": 44,
+      "h": 20,
+      "size_pt": 11,
+      "colour": "707D89"
+    },
+    "cover_jumbo": {
+      "x": 0,
+      "y": 300,
+      "w": 960,
+      "h": 240,
+      "fill": "10263B"
+    },
+    "cover_logo": {
+      "x": 60,
+      "y": 56,
+      "w": 220,
+      "h": 90
+    }
+  },
+  "layouts": [
+    {
+      "name": "Cover",
+      "base": "Title Slide",
+      "header": false,
+      "progress": false,
+      "page_no": false
+    },
+    {
+      "name": "Section Divider",
+      "base": "Title Only",
+      "header": false,
+      "progress": false,
+      "page_no": false
+    },
+    {
+      "name": "Title and Content",
+      "base": "Title and Content",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Two Content",
+      "base": "Two Content",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Comparison",
+      "base": "Two Content",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Picture with Caption",
+      "base": "Title Only",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Content over Image",
+      "base": "Blank",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Statement",
+      "base": "Blank",
+      "header": false,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Quote",
+      "base": "Blank",
+      "header": false,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Chart with Caption",
+      "base": "Title Only",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Table",
+      "base": "Title Only",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Closing",
+      "base": "Blank",
+      "header": false,
+      "progress": false,
+      "page_no": false
+    },
+    {
+      "name": "Title Only",
+      "base": "Title Only",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    },
+    {
+      "name": "Blank",
+      "base": "Blank",
+      "header": true,
+      "progress": true,
+      "page_no": true
+    }
+  ],
+  "charts": [
+    "bar",
+    "column_stacked",
+    "line",
+    "area",
+    "pie",
+    "doughnut",
+    "scatter",
+    "bubble",
+    "radar",
+    "combo",
+    "bar_percentStacked",
+    "waterfall",
+    "funnel",
+    "treemap",
+    "sunburst",
+    "histogram",
+    "pareto",
+    "boxWhisker"
+  ],
+  "assets": [
+    {
+      "name": "logo-single.png",
+      "url": "https://raw.githubusercontent.com/YanxiJiang/University-of-Nottingham-Presentation-Template/main/source/UoN_Nottingham_Blue_Single_Color_logo_RGB.png"
+    },
+    {
+      "name": "logo-white.png",
+      "url": "https://raw.githubusercontent.com/YanxiJiang/University-of-Nottingham-Presentation-Template/main/source/Nottingham_logo_all_white.png"
+    },
+    {
+      "name": "logo-blue-text.png",
+      "url": "https://raw.githubusercontent.com/YanxiJiang/University-of-Nottingham-Presentation-Template/main/source/UoN_Nottingham_Blue_white_text_logo_RGB.png"
+    }
+  ]
+}

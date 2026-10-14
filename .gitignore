@@ -1,0 +1,31 @@
+# LaTeX build artefacts
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.xdv
+*.nav
+*.snm
+*.toc
+*.vrb
+*.out
+*.synctex.gz
+
+# Generated OfficeCLI build script (contains machine-resolved absolute paths)
+_build.sh
+
+# Python
+__pycache__/
+*.pyc
+
+# Local preview renders (regenerate with the build scripts)
+preview/
+
+# Built template binaries — distributed via GitHub Releases, not tracked in git
+# (OOXML/ODF binaries are opaque to git diff; keeping them out avoids repo bloat)
+powerpoint/UoN-Presentation-Template.pptx
+powerpoint/UoN-Presentation-Template.potx
+powerpoint/UoN-Presentation-Template.otp
+
+# Local build artefacts (binaries, previews) — not tracked
+.local-build/
