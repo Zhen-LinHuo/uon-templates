@@ -1,0 +1,74 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
+This chapter sets out the problem, the gap in the literature, and the
+research questions addressed by the thesis. It demonstrates the elements
+the template provides: citations, cross-references, an equation, a table,
+a figure, and acronyms.
+
+\section{Motivation}
+
+An \gls{abm} represents individual agents whose local interactions produce
+system-level behaviour \autocite{bonabeau2002}. Such models are used where
+analytical treatment is intractable, for example in evacuation studies
+\autocite{helbing2000}.
+
+\section{Research questions}
+
+The thesis answers three questions:
+
+\begin{enumerate}
+  \item \rqref{1}: \rqone
+  \item \rqref{2}: \rqtwo
+  \item \rqref{3}: \rqthree
+\end{enumerate}
+
+\section{A quantified statement}
+
+Let $R$ denote the evacuation ratio. We estimate it as
+\begin{equation}
+  R_{\mathrm{evac}} = \sum_{i=1}^{N} \frac{w_i\,\rho_i}{\tau_i + \varepsilon},
+  \label{eq:revac}
+\end{equation}
+where $w_i$ is the weight of agent $i$, $\rho_i$ its density contribution,
+$\tau_i$ its exit time, and $\varepsilon$ a small positive constant that
+keeps the summand finite. \Cref{eq:revac} is referenced automatically.
+
+\section{Illustrative results}
+
+\Cref{tab:params} lists the parameters used throughout, and
+\cref{fig:decay} shows the corresponding decay curve.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Model parameters.}
+  \label{tab:params}
+  \begin{tabular}{lrr}
+    \toprule
+    Parameter & Symbol & Value \\
+    \midrule
+    Number of agents & $N$ & 250 \\
+    Exit width (m)   & $d$ & 1.2 \\
+    Time step (s)    & $\Delta t$ & 0.25 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[x=1.1cm,y=2.2cm]
+    \draw[NottinghamBlue, thick, ->] (0,0) -- (6.2,0) node[right] {$t$};
+    \draw[NottinghamBlue, thick, ->] (0,0) -- (0,1.35) node[above] {$R(t)$};
+    \draw[MalaysiaSkyBlue, ultra thick, domain=0:6, samples=80]
+      plot (\x, {exp(-0.45*\x)});
+    \draw[UoNRed, dashed, thick] (0,1) -- (6,1) node[right, black] {initial};
+  \end{tikzpicture}
+  \caption{Evacuation ratio decaying over time.}
+  \label{fig:decay}
+\end{figure}
+
+\section{Outline}
+
+\Cref{ch:literature} reviews prior work, \cref{ch:methodology} describes
+the method, \cref{ch:results} reports results, and \cref{ch:conclusion}
+concludes.

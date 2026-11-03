@@ -29,3 +29,7 @@ powerpoint/UoN-Presentation-Template.otp
 
 # Local build artefacts (binaries, previews) — not tracked
 .local-build/
+
+# LaTeX build output for thesis/ and report/
+build/
+beamer/main.pdf

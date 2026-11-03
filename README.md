@@ -41,6 +41,22 @@ Both use the same brand palette — Nottingham Blue `#10263B` and Sky Blue `#009
 │   ├── titlepage.tex            # cover page — edit title / author / date here
 │   ├── UoN.sty                  # theme: colours, header, progress bar, fonts
 │   └── source/                  # logo images used by the theme
+├── common/                     # shared LaTeX brand layer
+│   ├── uon-brand.sty            # colours, fonts, mono/body profiles (single source)
+│   └── assets/uon-logo-blue.png
+├── thesis/                     # full PhD/MPhil thesis
+│   ├── thesis.tex               # main file: front matter order, chapters, appendix
+│   ├── uon-thesis.sty           # geometry, title page, headings (loads uon-brand)
+│   ├── titlepage.tex            # thesis title-page fields — edit only this
+│   ├── rq.tex                   # research questions, defined once
+│   ├── front/ chapters/ back/
+│   ├── references.bib
+│   └── .latexmkrc               # LuaLaTeX + biber + build/
+├── report/                     # simplified report (coursework, reviews)
+│   ├── report.tex
+│   ├── uon-report.sty
+│   ├── references.bib
+│   └── .latexmkrc
 ├── LICENSE
 └── README.md
 ```
@@ -97,6 +113,52 @@ latexmk -xelatex main.tex
 3. The theme provides the header band with logo, the progress bar, and section-divider slides automatically.
 
 `cjktest.tex` is a minimal Chinese/English mixed-typesetting check — build it if you want to confirm CJK renders before writing a full deck.
+
+## Thesis
+
+A full thesis template for PhD/MPhil submission, laid out to the University's
+stated requirements: A4, single-sided, **left margin 4 cm** for binding and
+2.5 cm elsewhere, single or 1.5 line spacing, and the official front-matter
+order (contents → abstract → acknowledgements → abbreviations → list of
+figures → list of tables → chapters → bibliography → appendices). The title
+page reproduces the University's own wording.
+
+Word limits, from the Quality Manual: **100,000 words for a PhD**, 60,000 for
+an MPhil, in each case inclusive of appendices, footnotes, tables and
+bibliography.
+
+```bash
+cd thesis
+latexmk            # LuaLaTeX + biber, output in build/thesis.pdf
+```
+
+Edit **`titlepage.tex`** for the title, author, degree, month, student ID,
+supervisors and school. Define research questions once in **`rq.tex`** and
+reference them with `\rqone`, `\rqtwo`, … so the wording cannot drift between
+the introduction and the conclusion. Abbreviations go in
+`front/acronyms.tex` and are printed in their official position by
+`\uonabbreviations`.
+
+## Report
+
+A simplified template for coursework, literature reviews and interim reports:
+a compact title block instead of a full title page, sections rather than
+chapters, and a contents page only if you want one.
+
+```bash
+cd report
+latexmk            # output in build/report.pdf
+```
+
+Both LaTeX templates share `common/uon-brand.sty`, so colours and fonts are
+defined once. Switch profiles with package options:
+
+```latex
+\usepackage{uon-thesis}              % Noto Serif body, Noto Sans headings
+\usepackage[body=times]{uon-thesis}  % Times metrics (venue requirement)
+\usepackage[mono=maple]{uon-thesis}  % personal mono face (not portable)
+\usepackage[cjk]{uon-thesis}         % enable Chinese
+```
 
 ## Customising the brand
 
@@ -220,6 +282,37 @@ latexmk -xelatex main.tex
 3. 主题自动提供带校徽的页眉横条、进度条，以及章节分隔页。
 
 `cjktest.tex` 是一个最小的中英混排检查文件 —— 在撰写完整演示前，可先构建它以确认中日韩字体渲染正常。
+
+## 学位论文
+
+面向博士/硕士提交的完整论文模板，版式遵循大学规定：A4、单面、**左侧装订边距 4 cm**、其余 2.5 cm、单倍或 1.5 倍行距，前置部分按官方顺序排列（目录 → 摘要 → 致谢 → 缩略语 → 图例 → 表例 → 正文各章 → 参考文献 → 附录）。标题页文字沿用大学官方模板的措辞。
+
+字数上限（据 Quality Manual）：**博士 100,000 词**、硕士 60,000 词，均含附录、脚注、表格与参考文献。
+
+```bash
+cd thesis
+latexmk            # LuaLaTeX + biber，产物在 build/thesis.pdf
+```
+
+只需编辑 **`titlepage.tex`** 填写标题、作者、学位、提交月份、学号、导师与学院。研究问题在 **`rq.tex`** 中定义一次，用 `\rqone`、`\rqtwo` 等在全文引用，确保引言与结论的措辞不会走样。缩略语写在 `front/acronyms.tex`，由 `\uonabbreviations` 在官方位置输出。
+
+## 简版报告
+
+面向课程作业、文献综述与中期报告的简化模板：用紧凑标题块代替完整标题页，用节（section）代替章，目录按需开启。
+
+```bash
+cd report
+latexmk            # 产物在 build/report.pdf
+```
+
+两个 LaTeX 模板共用 `common/uon-brand.sty`，配色与字体只定义一处。通过宏包选项切换字体档：
+
+```latex
+\usepackage{uon-thesis}              % Noto Serif 正文 + Noto Sans 标题
+\usepackage[body=times]{uon-thesis}  % Times 度量（出版社要求时）
+\usepackage[mono=maple]{uon-thesis}  % 个人等宽字体（不可移植）
+\usepackage[cjk]{uon-thesis}         % 启用中文
+```
 
 ## 自定义品牌
 

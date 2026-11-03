@@ -1,0 +1,150 @@
+% =====================================================================
+% uon-thesis.sty — University of Nottingham PhD/MPhil thesis
+%
+% Conforms to the University's stated requirements:
+%   A4, single-sided, left margin >= 1.5 in (4 cm) for binding,
+%   other margins >= 1 in (2.5 cm), single or 1.5 line spacing.
+%   Front matter order: contents, abstract, acknowledgements,
+%   abbreviations, list of figures, list of tables, chapters,
+%   bibliography, appendices.
+%
+% Engine: LuaLaTeX.
+% Options pass through, e.g.
+%   \usepackage[mono=maple]{uon-thesis}   % personal mono face
+%   \usepackage[body=times]{uon-thesis}   % Times metrics for a venue
+%   \usepackage[cjk]{uon-thesis}          % enable Chinese
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{uon-thesis}[2026/11/03 UoN thesis layout]
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{uon-brand}}
+\ProcessOptions\relax
+
+\RequirePackage{uon-brand}       % colours, fonts, mono/body profiles, microtype
+\RequirePackage{etoolbox}
+\RequirePackage{setspace}
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{cleveref}
+\RequirePackage[symbols]{glossaries}   % noidx mode: no external index tool
+\makenoidxglossaries
+
+% ---------------------------------------------------------------- geometry
+% Left margin 4 cm for binding; the other three 2.5 cm.
+\geometry{
+  a4paper,
+  left=40mm, right=25mm, top=25mm, bottom=25mm,
+  headheight=15pt, headsep=8mm, footskip=12mm
+}
+
+% ---------------------------------------------------------------- spacing
+\onehalfspacing          % "single or one and a half" — 1.5 reads better
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6\baselineskip}
+\raggedbottom
+
+% ---------------------------------------------------------------- headers
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}}
+
+% ---------------------------------------------------------------- headings
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\bfseries\color{NottinghamBlue}}
+  {\filright\fontsize{13}{15}\selectfont\MakeUppercase{\chaptertitlename}\ \thechapter}
+  {8pt}
+  {\filright\fontsize{26}{30}\selectfont}
+\titlespacing*{\chapter}{0pt}{0pt}{28pt}
+
+\titleformat{\section}
+  {\normalfont\sffamily\bfseries\large\color{NottinghamBlue}}{\thesection}{0.8em}{}
+\titleformat{\subsection}
+  {\normalfont\sffamily\bfseries\normalsize\color{NottinghamBlue}}{\thesubsection}{0.8em}{}
+
+% ---------------------------------------------------------------- metadata
+\newcommand{\uondegree}[1]{\def\uon@degree{#1}}
+\newcommand{\uonsubmitmonth}[1]{\def\uon@submitmonth{#1}}
+\newcommand{\uonstudentid}[1]{\def\uon@studentid{#1}}
+\newcommand{\uonsupervisors}[1]{\def\uon@supervisors{#1}}
+\newcommand{\uonschool}[1]{\def\uon@school{#1}}
+\newcommand{\uonfaculty}[1]{\def\uon@faculty{#1}}
+
+\newcommand{\uonmonthname}{\ifcase\month\or January\or February\or March\or
+  April\or May\or June\or July\or August\or September\or October\or
+  November\or December\fi\space\number\year}
+
+\def\uon@degree{Doctor of Philosophy}
+\def\uon@submitmonth{\uonmonthname}
+\def\uon@studentid{}
+\def\uon@supervisors{}
+\def\uon@school{}
+\def\uon@faculty{}
+
+% ---------------------------------------------------------------- title page
+% Field order follows the University's own thesis template.
+\graphicspath{{../common/assets/}{assets/}}
+
+\makeatletter
+\newcommand{\uonmaketitle}{%
+  \begin{titlepage}
+    \thispagestyle{empty}%
+    \centering
+    \vspace*{8mm}
+    \IfFileExists{uon-logo-blue.png}{%
+      \includegraphics[width=58mm]{uon-logo-blue}\par}{}%
+    \vspace{16mm}
+
+    {\sffamily\bfseries\fontsize{24}{30}\selectfont\color{NottinghamBlue}%
+     \@title\par}
+
+    \vspace{14mm}
+    {\large Thesis submitted to the University of Nottingham\par
+     \vspace{2mm}
+     for the degree of \uon@degree\par}
+
+    \vspace{6mm}
+    {\large\uon@submitmonth\par}
+
+    \vfill
+
+    {\large\@author\par}
+    \ifdefempty{\uon@studentid}{}%
+      {\vspace{2mm}{\normalsize Student ID: \uon@studentid\par}}
+    \ifdefempty{\uon@supervisors}{}%
+      {\vspace{4mm}{\normalsize Supervisors: \uon@supervisors\par}}
+    \vspace{8mm}
+    {\normalsize
+      \ifdefempty{\uon@school}{}{\uon@school\par}%
+      \ifdefempty{\uon@faculty}{}{\uon@faculty\par}%
+      University of Nottingham\par}
+    \vspace*{6mm}
+  \end{titlepage}%
+}
+\makeatother
+
+% ---------------------------------------------------------------- front matter
+% Official order is enforced by the order of the \input lines in thesis.tex.
+\newcommand{\uonfrontmatter}{%
+  \pagestyle{plain}%
+  \pagenumbering{roman}%
+  \tableofcontents
+  \clearpage
+}
+\newcommand{\uonmainmatter}{%
+  \clearpage
+  \pagestyle{fancy}%
+  \pagenumbering{arabic}%
+}
+% List of Abbreviations in its official position (after acknowledgements,
+% before the lists of figures and tables).
+\newcommand{\uonabbreviations}{%
+  \clearpage
+  \printnoidxglossary[type=\acronymtype, title={List of Abbreviations}]%
+}
+
+\endinput

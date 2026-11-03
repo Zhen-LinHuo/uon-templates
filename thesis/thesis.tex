@@ -1,0 +1,61 @@
+% !TEX program = lualatex
+% =====================================================================
+% University of Nottingham thesis — main file
+% Build: latexmk            (reads .latexmkrc; LuaLaTeX + biber)
+% =====================================================================
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ---- Bibliography: biblatex + biber, author-year (Harvard) ----------
+% Loaded before the template so its hyperref comes later (biblatex
+% requires that order).
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  sorting=nyt,
+  maxbibnames=99,
+  giveninits=false,
+  doi=true,
+  url=true,
+]{biblatex}
+\addbibresource{references.bib}
+
+% ---- Template -------------------------------------------------------
+% Options: [cjk] Chinese support, [body=times] Times metrics,
+%          [mono=maple] personal mono face.
+\usepackage{uon-thesis}
+
+% ---- Presentation metadata (edit titlepage.tex, not here) -----------
+\input{titlepage}
+\input{rq}                       % research questions, defined once
+
+% ---- Abbreviations: entries must be declared in the preamble --------
+\loadglsentries{front/acronyms}
+
+\begin{document}
+
+\uonmaketitle
+
+% ---------------- front matter (official order) ---------------------
+\uonfrontmatter
+\input{front/abstract}
+\input{front/acknowledgements}
+\uonabbreviations
+\clearpage
+\listoffigures
+\listoftables
+
+% ---------------- main matter --------------------------------------
+\uonmainmatter
+\input{chapters/01-introduction}
+\input{chapters/02-literature-review}
+\input{chapters/03-methodology}
+\input{chapters/04-results}
+\input{chapters/05-conclusion}
+
+% ---------------- bibliography + appendices -------------------------
+\printbibliography[heading=bibintoc, title={Bibliography}]
+
+\appendix
+\input{back/appendices}
+
+\end{document}

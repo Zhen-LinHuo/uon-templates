@@ -1,0 +1,127 @@
+% =====================================================================
+% uon-brand.sty — University of Nottingham brand core (shared)
+%
+% Single source of truth for colours, fonts and the mono/body profiles.
+% Loaded by uon-thesis.sty and uon-report.sty so the two templates cannot
+% drift apart.  Engine: LuaLaTeX (default for this repository).
+%
+% Options
+%   body=noto   (default) Noto Serif body + Noto Sans headings
+%   body=times            TeX Gyre Termes body (Times metrics) — for venues
+%                         that mandate Times; keeps the same brand colours
+%   mono=noto   (default) Noto Sans Mono — TeX Live, portable
+%   mono=maple            Maple Mono Normal NF CN — personal override only;
+%                         the face is NOT in TeX Live, so builds stop being
+%                         portable.  Use for your own drafts.
+%   cjk                   enable Chinese/Japanese/Korean (Fandol, TeX Live).
+%                         Off by default; the thesis is English.
+%
+% Every face resolves through kpathsea, so a full TeX Live needs nothing
+% installed system-wide.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{uon-brand}[2026/11/03 UoN brand core]
+
+\RequirePackage{iftex}
+\ifLuaTeX\else
+  \PackageError{uon-brand}
+    {This template targets LuaLaTeX}
+    {Build with `latexmk` (see .latexmkrc, $pdf_mode = 4) or `lualatex`.}
+\fi
+
+% ---------------------------------------------------------------- options
+\newif\ifuon@cjk      \uon@cjkfalse
+\def\uon@body{noto}
+\def\uon@mono{noto}
+
+\DeclareOption{cjk}{\uon@cjktrue}
+\DeclareOption{body=noto}{\def\uon@body{noto}}
+\DeclareOption{body=times}{\def\uon@body{times}}
+\DeclareOption{mono=noto}{\def\uon@mono{noto}}
+\DeclareOption{mono=maple}{\def\uon@mono{maple}}
+\DeclareOption*{\PackageWarning{uon-brand}{Unknown option `\CurrentOption'}}
+\ProcessOptions\relax
+
+% ---------------------------------------------------------------- colours
+% Official University of Nottingham palette.
+\RequirePackage{xcolor}
+\definecolor{NottinghamBlue}{HTML}{10263B}
+\definecolor{MalaysiaSkyBlue}{HTML}{009BC1}
+% tints of Nottingham Blue
+\definecolor{UoNBlue60}{HTML}{405162}
+\definecolor{UoNBlue40}{HTML}{707D89}
+\definecolor{UoNBlue20}{HTML}{9FA8B1}
+\definecolor{UoNBlue10}{HTML}{CFD4D8}
+\definecolor{UoNBlue5}{HTML}{F3F4F5}
+% supporting palette
+\definecolor{UoNRed}{HTML}{B91C2E}
+\definecolor{UoNGold}{HTML}{DEB406}
+\definecolor{UoNGreen}{HTML}{005F36}
+\definecolor{UoNTeal}{HTML}{37B4B0}
+\definecolor{PortlandStone}{HTML}{FAF6EF}
+
+% ---------------------------------------------------------------- fonts
+\RequirePackage{fontspec}
+\RequirePackage{etoolbox}
+
+\ifuon@cjk
+  % CJK first: ctex defines the CJK font interface that fontspec body
+  % selection sits beside. Fandol ships with TeX Live (zero system fonts).
+  \RequirePackage[UTF8,fontset=fandol,scheme=plain]{ctex}
+\fi
+
+% Note: \ifdefstring, not \ifstrequal. \ifstrequal compares the *macro
+% token*, not its expansion, so a profile selected through an option
+% silently falls back to the default branch — no error, wrong fonts.
+\ifdefstring{\uon@body}{times}{%
+  % Times metrics, TeX Live (tex-gyre). Keeps brand colours and headings.
+  % Select through fontspec rather than \RequirePackage{tgtermes}: the
+  % legacy package only sets \rmdefault, which unicode-math (loaded below)
+  % resets to Latin Modern — so the option would appear to work while
+  % silently embedding the wrong face.
+  \setmainfont{TeX Gyre Termes}%
+  \setsansfont{TeX Gyre Heros}%
+  \renewcommand{\familydefault}{\rmdefault}%
+}{%
+  % Noto: serif body, sans headings — our default for prose documents.
+  \setmainfont{NotoSerif}[
+    Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold,
+    ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+  \setsansfont{NotoSans}[
+    Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold,
+    ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+  \renewcommand{\familydefault}{\rmdefault}%
+}
+
+\ifdefstring{\uon@mono}{maple}{%
+  % Personal override: NOT in TeX Live — the build is no longer portable.
+  \setmonofont{Maple Mono Normal NF CN}[Scale=MatchLowercase]%
+}{%
+  \setmonofont{NotoSansMono}[
+    Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold,
+    Scale=MatchLowercase]%
+}
+
+% Math companion (TeX Live). Serif maths pairs with either body profile.
+\RequirePackage{unicode-math}
+\setmathfont{LibertinusMath-Regular.otf}
+
+% ---------------------------------------------------------------- typography
+\RequirePackage{microtype}   % LuaTeX: protrusion + expansion (the reason
+                             % LuaLaTeX is our default — see the latex skill)
+\RequirePackage{tikz}        % figures drawn in the document
+\RequirePackage{booktabs}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+
+% Brand-coloured section marks and captions.
+\RequirePackage{caption}
+\captionsetup{
+  font=small,
+  labelfont={bf,color=NottinghamBlue},
+  labelsep=period
+}
+
+\newcommand{\uonname}{University of Nottingham}
+
+\endinput

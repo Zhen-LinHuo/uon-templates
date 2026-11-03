@@ -1,0 +1,69 @@
+% !TEX program = lualatex
+% =====================================================================
+% University of Nottingham — simplified report
+% Coursework, literature review, interim report.
+% Build: latexmk        (LuaLaTeX + biber, see .latexmkrc)
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  sorting=nyt,
+  maxbibnames=99,
+  doi=true,
+  url=true,
+]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{uon-report}
+
+\title{Report Title}
+\subtitle{Coursework, literature review or interim report}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\uonreporttitle
+
+% Uncomment for a contents page (useful beyond about five pages).
+% \tableofcontents
+% \newpage
+
+\section{Introduction}
+
+State the question this report answers and why it matters. Cite the
+literature in author-year form, e.g.\ \textcite{bonabeau2002}, or
+parenthetically \parencite{helbing2000}.
+
+\section{Approach}
+
+Describe the method, the sources, and the scope.
+
+\section{Findings}
+
+Present the findings. Use a table or figure only where it carries more
+information than the prose would.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Summary of reviewed sources.}
+  \label{tab:sources}
+  \begin{tabular}{llr}
+    \toprule
+    Source & Strand & Year \\
+    \midrule
+    Bonabeau & modelling & 2002 \\
+    Helbing et al. & evacuation & 2000 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Conclusion}
+
+Answer the question, name the limitation, and state what follows.
+
+\printbibliography[heading=bibintoc, title={References}]
+
+\end{document}
