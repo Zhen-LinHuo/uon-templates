@@ -32,4 +32,7 @@ powerpoint/UoN-Presentation-Template.otp
 
 # LaTeX build output for thesis/ and report/
 build/
+
+# Private agent layer — no remote at or below L1, so it can never be disclosed
+AGENTS.local.md
 beamer/main.pdf
