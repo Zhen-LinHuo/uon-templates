@@ -1,0 +1,120 @@
+% !TEX program = lualatex
+% =====================================================================
+% CEE Annual Report — University of Nottingham
+%
+% One template for the school's annual report. \reviewyear selects the
+% title-page line, and the chapter set follows the year being reported:
+%
+%   Year 1  1 Introduction (background, problem, aim, objectives +
+%             hypothesis, definitions, training courses)
+%           2 Literature review
+%           3 Current year report (materials & methods, results,
+%             constraints)
+%           4 Research plan for the next year
+%           5 Summary and conclusion
+%   Year 2  1 Previous year highlights (summary, constraints, achievements)
+%           2 Current year report
+%           3 Research plan for the next year
+%           4 Summary and conclusion
+%   Year 3  1 Years one and two highlights
+%           2 Current year report
+%           3 Thesis/dissertation readiness (extent of completion, plan
+%             for what remains)
+%           4 Summary and conclusion
+%
+% The chapters below are the year-1 arrangement, the fullest of the three:
+% drop the literature review, or replace chapters 1 and 4 with the rows
+% above, and the rest of the document is unchanged. The title page,
+% abstract, references, appendices and signature block are identical in
+% every year.
+%
+% Formatting is handled by uon-annual-report.sty: A4, 12 pt, Times
+% (TeX Gyre Termes, metric-compatible), 1.5 spacing, and the margins the
+% school specifies. Nothing here depends on a system font.
+% =====================================================================
+\documentclass[12pt,a4paper]{report}
+\usepackage{uon-annual-report}
+
+% If the report is only ever submitted as a PDF and you do not want the
+% 5 cm binding margin, uncomment this and rebuild:
+% \geometry{left=3.2cm,right=3.2cm,top=2.7cm,bottom=2.7cm}
+
+\reviewyear{1}
+
+\studentname{Your Full Name}
+\studentid{20XXXXXXX}
+\school{Department of Civil Engineering}
+\major{Civil Engineering}
+\startdate{September 2026}
+\supervisors{Prof. First Supervisor; Dr Second Supervisor}
+\thesistitle{Working title of the thesis}
+
+\begin{document}
+
+\uonannualtitle
+
+% The school asks for not less than 300 words.
+\begin{abstract}
+  Write the abstract here: the problem, what you did this year, what you
+  found, and what it means for the thesis.
+\end{abstract}
+
+\tableofcontents
+\clearpage
+
+% ---------------------------------------------------------------- chapter 1
+\chapter{INTRODUCTION}
+
+\section{Background to the Study}
+
+\section{Statement of the Research Problem}
+
+\section{Aim of the Study}
+
+\section{Objectives of the Study}
+% State the objectives; where the study has a hypothesis, state it inside
+% this section. The form annotates it "Objectives of the Study [Hypothesis]"
+% and numbers nothing separately.
+
+\section{Definition of Terms}
+
+\section{List of training courses completed}
+
+% ---------------------------------------------------------------- chapter 2
+\chapter{LITERATURE REVIEW}
+
+% ---------------------------------------------------------------- chapter 3
+\chapter{CURRENT YEAR REPORT}
+
+\section{Materials and methods}
+
+\subsection{Materials}
+
+\subsection{Methods}
+
+\section{Results and discussion}
+% Link every result back to the specific objective it addresses.
+
+\section{Constraints}
+% The challenges faced this year and the measures taken.
+
+% ---------------------------------------------------------------- chapter 4
+\chapter{RESEARCH PLAN FOR THE NEXT YEAR}
+
+\section{Research plan}
+% Again, tie each item of the plan to a specific objective.
+
+% ---------------------------------------------------------------- chapter 5
+\chapter{SUMMARY AND CONCLUSION}
+
+% References: Harvard (biblatex authoryear), all sources current.
+\printbibliography[heading=bibintoc,title={REFERENCES}]
+
+% Appendices, if any. Unnumbered, because the form numbers no appendix.
+\appendix
+\chapter*{APPENDICES}
+\addcontentsline{toc}{chapter}{Appendices}
+
+\signatureblock
+
+\end{document}

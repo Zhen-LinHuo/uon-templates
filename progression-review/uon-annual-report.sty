@@ -1,0 +1,127 @@
+% =====================================================================
+% uon-annual-report.sty — University of Nottingham CEE annual report
+%
+% Layout follows the school's written requirement (GENERAL NOTE in the
+% official template): A4, 12 pt, Times, 1.5 spacing, left margin at least
+% 1.5 in and preferably 2 in for binding, other margins at least 1 in.
+% The sample PDF itself sets ~3.2 cm all round; if the report is only ever
+% submitted as a PDF, uncomment the \geometry line in annual-report.tex.
+%
+% Fonts: Times New Roman is not installable from TeX Live, so the body uses
+% TeX Gyre Termes, which is metric-compatible with Times. Nothing depends on
+% a system font.
+% =====================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{uon-annual-report}[2026/11/03 UoN CEE annual report]
+
+\RequirePackage[body=times]{uon-brand}
+\RequirePackage[a4paper,left=5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,
+                headheight=14pt]{geometry}
+\RequirePackage{setspace}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage[style=authoryear,backend=biber,sorting=nyt,
+                maxcitenames=2,giveninits=true]{biblatex}
+\addbibresource{references.bib}
+
+\onehalfspacing
+
+% ---------------------------------------------------------------- headings
+% "CHAPTER ONE: INTRODUCTION" — the word precedes the number, as in the
+% official template, while sections stay arabic (1.1, 1.2, …).
+\newcommand{\uon@chapterword}{%
+  \ifcase\value{chapter}\or ONE\or TWO\or THREE\or FOUR\or FIVE\or SIX\fi}
+\titleformat{\chapter}[block]
+  {\normalfont\bfseries\large}
+  {\MakeUppercase{\chaptername}\ \uon@chapterword:\quad}{0pt}{}
+\titlespacing*{\chapter}{0pt}{0pt}{18pt}
+
+\titleformat{\section}[block]{\normalfont\bfseries\normalsize}{\thesection}{0.8em}{}
+\titleformat{\subsection}[block]{\normalfont\bfseries\normalsize}{\thesubsection}{0.8em}{}
+
+% No running head; the official form carries a plain page number.
+\pagestyle{plain}
+
+% ---------------------------------------------------------------- fields
+\newcommand{\uon@studentname}{}
+\newcommand{\uon@studentid}{}
+\newcommand{\uon@school}{}
+\newcommand{\uon@major}{}
+\newcommand{\uon@startdate}{}
+\newcommand{\uon@supervisors}{}
+\newcommand{\uon@thesistitle}{}
+
+\newcommand{\studentname}[1]{\renewcommand{\uon@studentname}{#1}}
+\newcommand{\studentid}[1]{\renewcommand{\uon@studentid}{#1}}
+\newcommand{\school}[1]{\renewcommand{\uon@school}{#1}}
+\newcommand{\major}[1]{\renewcommand{\uon@major}{#1}}
+\newcommand{\startdate}[1]{\renewcommand{\uon@startdate}{#1}}
+\newcommand{\supervisors}[1]{\renewcommand{\uon@supervisors}{#1}}
+\newcommand{\thesistitle}[1]{\renewcommand{\uon@thesistitle}{#1}}
+
+\newcommand{\uon@reviewyear}{1}
+% Only used for the title-page line "For the Nth Year Annual Review"; the
+% chapter structure is written in the document itself.
+\newcommand{\reviewyear}[1]{\renewcommand{\uon@reviewyear}{#1}}
+
+% ---------------------------------------------------------------- title page
+\newcommand{\uon@field}[2]{%
+  \par\noindent\textbf{#1:}\quad #2\par\vspace{2pt}}
+
+\newcommand{\uonannualtitle}{%
+  \begin{titlepage}
+    \centering
+    {\bfseries\LARGE CEE ANNUAL REPORT\par}
+    \vspace{10pt}
+    {\large For the \uon@reviewyear\ifcase\uon@reviewyear\or st\or nd\or rd\else th\fi\
+     Year Annual Review\par}
+    \vspace{28pt}
+    \begin{minipage}{0.86\textwidth}
+      \uon@field{Student Name}{\uon@studentname}
+      \uon@field{Student ID Number}{\uon@studentid}
+      \uon@field{School}{\uon@school}
+      \uon@field{Major}{\uon@major}
+      \uon@field{Start Date}{\uon@startdate}
+      \uon@field{Supervisors}{\uon@supervisors}
+      \vspace{14pt}
+      \uon@field{Thesis Title}{\uon@thesistitle}
+    \end{minipage}
+    \vfill
+  \end{titlepage}%
+}
+
+% ---------------------------------------------------------------- abstract
+% The school asks for not less than 300 words. The word count is printed in
+% the margin-free draft only; \finalcopy removes it.
+\newif\ifuon@draft \uon@drafttrue
+\newcommand{\finalcopy}{\uon@draftfalse}
+
+\renewenvironment{abstract}{%
+  \chapter*{Abstract}%
+  \addcontentsline{toc}{chapter}{Abstract}%
+  \begin{quote}%
+}{%
+  \end{quote}%
+  \ifuon@draft
+    \par\vspace{6pt}\noindent{\footnotesize\itshape
+      [Draft check: the school requires at least 300 words.]}%
+  \fi
+}
+
+% ---------------------------------------------------------------- signature
+% Printed once, at the very end, as in the official form.
+\newcommand{\signatureblock}{%
+  \par\vspace{36pt}
+  \noindent
+  \begin{minipage}[t]{0.48\textwidth}
+    \rule{6cm}{0.4pt}\\[2pt] Student's signature/Date
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \rule{6cm}{0.4pt}\\[2pt] Supervisor's signature/Date
+  \end{minipage}
+}
+
+% ---------------------------------------------------------------- skeleton
+% The chapter structure lives in annual-report.tex as ordinary chapters, so
+% the writer can add, merge or drop a section without touching this package.
+\endinput

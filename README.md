@@ -4,9 +4,9 @@ Brand-compliant presentation templates for the University of Nottingham — one 
 
 <div align="center">
 
-[![License](https://badgen.net/github/license/Zhen-LinHuo/uon-presentation-templates)](https://github.com/Zhen-LinHuo/uon-presentation-templates/blob/main/LICENSE)
-[![Stars](https://badgen.net/github/stars/Zhen-LinHuo/uon-presentation-templates)](https://github.com/Zhen-LinHuo/uon-presentation-templates)
-[![Last commit](https://badgen.net/github/last-commit/Zhen-LinHuo/uon-presentation-templates)](https://github.com/Zhen-LinHuo/uon-presentation-templates/commits/main)
+[![License](https://badgen.net/github/license/Zhen-LinHuo/uon-templates)](https://github.com/Zhen-LinHuo/uon-templates/blob/main/LICENSE)
+[![Stars](https://badgen.net/github/stars/Zhen-LinHuo/uon-templates)](https://github.com/Zhen-LinHuo/uon-templates)
+[![Last commit](https://badgen.net/github/last-commit/Zhen-LinHuo/uon-templates)](https://github.com/Zhen-LinHuo/uon-templates/commits/main)
 
 </div>
 
@@ -55,6 +55,11 @@ Both use the same brand palette — Nottingham Blue `#10263B` and Sky Blue `#009
 ├── report/                     # simplified report (coursework, reviews)
 │   ├── report.tex
 │   ├── uon-report.sty
+│   ├── references.bib
+│   └── .latexmkrc
+├── progression-review/         # CEE annual report
+│   ├── annual-report.tex
+│   ├── uon-annual-report.sty
 │   ├── references.bib
 │   └── .latexmkrc
 ├── LICENSE
@@ -160,6 +165,30 @@ defined once. Switch profiles with package options:
 \usepackage[cjk]{uon-thesis}         % enable Chinese
 ```
 
+## Progression review
+
+The annual report the school's progression review asks for: title page with the
+student and thesis fields, an abstract of at least 300 words, the chapter
+structure of the official form, Harvard references and a student/supervisor
+signature block at the end.
+
+```bash
+cd progression-review
+latexmk            # output in build/annual-report.pdf
+```
+
+The template follows the written requirement — A4, 12 pt, Times, 1.5 spacing,
+left margin 5 cm for binding and 2.5 cm elsewhere. Times New Roman itself is
+not available from TeX Live, so the body uses TeX Gyre Termes, which carries
+Times metrics. If the report is only ever submitted electronically, uncomment
+the `\geometry` line at the top of `annual-report.tex` to use symmetric 3.2 cm
+margins instead.
+
+`\reviewyear{1}` sets the title-page line; the top of `annual-report.tex`
+tabulates the chapters each year asks for. The chapters written there are the
+fullest set, so a later year substitutes one or two of them and leaves the
+title page, abstract, references, appendices and signature block alone.
+
 ## Customising the brand
 
 Colours and fonts live in two places, both easy to edit:
@@ -189,9 +218,9 @@ Code and template sources are released under the [Apache License 2.0](LICENSE). 
 
 <div align="center">
 
-[![License](https://badgen.net/github/license/Zhen-LinHuo/uon-presentation-templates)](https://github.com/Zhen-LinHuo/uon-presentation-templates/blob/main/LICENSE)
-[![Stars](https://badgen.net/github/stars/Zhen-LinHuo/uon-presentation-templates)](https://github.com/Zhen-LinHuo/uon-presentation-templates)
-[![Last commit](https://badgen.net/github/last-commit/Zhen-LinHuo/uon-presentation-templates)](https://github.com/Zhen-LinHuo/uon-presentation-templates/commits/main)
+[![License](https://badgen.net/github/license/Zhen-LinHuo/uon-templates)](https://github.com/Zhen-LinHuo/uon-templates/blob/main/LICENSE)
+[![Stars](https://badgen.net/github/stars/Zhen-LinHuo/uon-templates)](https://github.com/Zhen-LinHuo/uon-templates)
+[![Last commit](https://badgen.net/github/last-commit/Zhen-LinHuo/uon-templates)](https://github.com/Zhen-LinHuo/uon-templates/commits/main)
 
 </div>
 
@@ -226,6 +255,14 @@ Code and template sources are released under the [Apache License 2.0](LICENSE). 
 │   ├── titlepage.tex            # 封面页 —— 在此修改标题 / 作者 / 日期
 │   ├── UoN.sty                  # 主题：配色、页眉、进度条、字体
 │   └── source/                  # 主题使用的校徽图片
+├── common/                     # LaTeX 共享品牌层
+│   ├── uon-brand.sty            # 配色、字体与字体档（单一来源）
+│   └── assets/uon-logo-blue.png
+├── thesis/                     # 学位论文
+├── report/                     # 简版报告（作业、文献综述）
+├── progression-review/         # CEE 年审报告
+│   ├── annual-report.tex
+│   └── uon-annual-report.sty
 ├── LICENSE
 └── README.md
 ```
@@ -313,6 +350,19 @@ latexmk            # 产物在 build/report.pdf
 \usepackage[mono=maple]{uon-thesis}  % 个人等宽字体（不可移植）
 \usepackage[cjk]{uon-thesis}         % 启用中文
 ```
+
+## 年审报告
+
+学院 progression review 要求的年度报告：含学生与论文信息的标题页、不少于 300 词的摘要、官方表单的章节结构、Harvard 参考文献，文末为学生/导师签署栏。
+
+```bash
+cd progression-review
+latexmk            # 产物在 build/annual-report.pdf
+```
+
+版式遵循学校的书面要求：A4、12pt、Times、1.5 倍行距、左侧装订边距 5 cm、其余 2.5 cm。TeX Live 不提供 Times New Roman 本体，正文使用度量兼容的 TeX Gyre Termes。若只提交电子版、不需要装订边，取消 `annual-report.tex` 顶部 `\geometry` 那一行的注释即可改为上下左右 3.2 cm。
+
+`\reviewyear{1}` 决定标题页那一行；各年级所需的章节列在 `annual-report.tex` 文件头部。文件里写的是最完整的一套章节，其他年级替换其中一两章即可，标题页、摘要、参考文献、附录与签署栏不变。
 
 ## 自定义品牌
 
